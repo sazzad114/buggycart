@@ -248,7 +248,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 				$cardconnect_order['total_formatted'] = $this->currency->format($cardconnect_order['total'], $cardconnect_order['currency_code'], false, true);
 
-				$cardconnect_order['total_captured'] = $this->model_extension_payment_cardconnect->getTotalCaptured($cardconnect_order['payment_cardconnect_order_id']);
+				$cardconnect_order['total_captured'] = $this->model_extension_payment_cardconnect->getTotalCaptured($cardconnect_order['cardconnect_order_id']);
 
 				$cardconnect_order['total_captured_formatted'] = $this->currency->format($cardconnect_order['total_captured'], $cardconnect_order['currency_code'], false, true);
 

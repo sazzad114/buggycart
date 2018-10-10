@@ -100,6 +100,31 @@ class ModelAccountOrder extends Model {
 		}
 	}
 
+
+    public function getCardByOrder($orderId)
+    {
+
+        $row['account'] = "N/A";
+        $usedCardConnect = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE order_id = '" . $orderId . "' and payment_code = 'cardconnect'");
+
+        if ($usedCardConnect->num_rows) {
+
+            $query = $this->db->query("SELECT cardconnect_order_id FROM `" . DB_PREFIX . "cardconnect_order` WHERE order_id = '" . $orderId . "'");
+
+            if (!$query->num_rows) {
+                return $row;
+            }
+
+            $cardconnect_order_id = $query->row['cardconnect_order_id'];
+
+            $account = $this->db->query("SELECT * FROM `" . DB_PREFIX . "cardconnect_card` WHERE cardconnect_order_id = '" . $cardconnect_order_id . "'");
+
+            return $account->row;
+        }
+
+        return $row;
+    }
+
 	public function getOrders($start = 0, $limit = 20) {
 		if ($start < 0) {
 			$start = 0;

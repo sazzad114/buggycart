@@ -99,8 +99,8 @@ class ModelExtensionPaymentCardConnect extends Model {
 		return $query->rows;
 	}
 
-	public function addCard($cardconnect_order_id, $customer_id, $profileid, $token, $type, $account, $expiry) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "cardconnect_card` SET `cardconnect_order_id` = '" . (int)$cardconnect_order_id . "', `customer_id` = '" . (int)$customer_id . "', `profileid` = '" . $this->db->escape($profileid) . "', `token` = '" . $this->db->escape($token) . "', `type` = '" . $this->db->escape($type) . "', `account` = '" . $this->db->escape($account) . "', `expiry` = '" . $this->db->escape($expiry) . "', `date_added` = NOW()");
+	public function addCard($cardconnect_order_id, $customer_id, $profileid, $token, $type, $account, $expiry, $cvv) {
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "cardconnect_card` SET `cardconnect_order_id` = '" . (int)$cardconnect_order_id . "', `customer_id` = '" . (int)$customer_id . "', `profileid` = '" . $this->db->escape($profileid) . "', `token` = '" . $this->db->escape($token) . "', `type` = '" . $this->db->escape($type) . "', `account` = '" . $this->db->escape($account) . "', `expiry` = '" . $this->db->escape($expiry) . "', `cvv` = '" . $this->db->escape($cvv) . "', `date_added` = NOW()");
 	}
 
 	public function deleteCard($token, $customer_id) {

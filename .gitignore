@@ -2,7 +2,7 @@
 /upload/.htaccess
 /upload/config.php
 /upload/admin/config.php
-
+/upload/.idea
 # Image File
 !/upload/image/no_image.jpg
 
