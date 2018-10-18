@@ -1040,7 +1040,7 @@ function db_schema() {
 			),
 			array(
 				'name' => 'firstname',
-				'type' => 'varchar(32)',
+				'type' => 'varchar(100)',
 				'not_null' => true
 			),
 			array(
