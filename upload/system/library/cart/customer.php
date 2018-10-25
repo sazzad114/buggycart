@@ -38,6 +38,8 @@ class Customer {
 
   public function login($email, $password, $override = false) {
 
+	    // add md5 hashing
+        $password = md5($password);
 	    $customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE email = '" . $email . "' AND password = '" . $password . "'");
 
 		if ($customer_query->num_rows) {
