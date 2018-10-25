@@ -119,6 +119,8 @@ class ModelAccountOrder extends Model {
 
             $account = $this->db->query("SELECT * FROM `" . DB_PREFIX . "cardconnect_card` WHERE cardconnect_order_id = '" . $cardconnect_order_id . "'");
 
+            // decrypt account here...
+
             return $account->row;
         }
 
