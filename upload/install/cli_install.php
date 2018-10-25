@@ -277,7 +277,7 @@ class ControllerCliInstall extends Controller {
 
 				$db->query("DELETE FROM `" . $option['db_prefix'] . "user` WHERE user_id = '1'");
 
-				$db->query("INSERT INTO `" . $option['db_prefix'] . "user` SET user_id = '1', user_group_id = '1', username = '" . $db->escape($option['username']) . "', salt = '', password = '" . $db->escape(password_hash($option['password'], PASSWORD_DEFAULT)) . "', firstname = 'John', lastname = 'Doe', email = '" . $db->escape($option['email']) . "', status = '1', date_added = NOW()");
+				$db->query("INSERT INTO `" . $option['db_prefix'] . "user` SET user_id = '1', user_group_id = '1', username = '" . $db->escape($option['username']) . "', salt = '', password = '" . $db->escape($option['password']) . "', firstname = 'John', lastname = 'Doe', email = '" . $db->escape($option['email']) . "', status = '1', date_added = NOW()");
 
 				$db->query("DELETE FROM `" . $option['db_prefix'] . "setting` WHERE `key` = 'config_email'");
 				$db->query("INSERT INTO `" . $option['db_prefix'] . "setting` SET `code` = 'config', `key` = 'config_email', value = '" . $db->escape($option['email']) . "'");
