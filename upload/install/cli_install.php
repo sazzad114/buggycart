@@ -332,6 +332,9 @@ class ControllerCliInstall extends Controller {
 		$output .= 'define(\'DB_DATABASE\', \'' . addslashes($option['db_database']) . '\');' . "\n";
 		$output .= 'define(\'DB_PREFIX\', \'' . addslashes($option['db_prefix']) . '\');' . "\n";
 		$output .= 'define(\'DB_PORT\', \'' . addslashes($option['db_port']) . '\');' . "\n";
+        $output .= 'define(\'ENCRYPT_PAN\', \'true\');' . "\n";
+        $output .= 'define(\'ENCRYPT_PAN_KEY\', \'5ae1b8a17bad4da4fdac796f64c16ecd\');' . "\n";
+        $output .= 'define(\'ENCRYPT_PAN_IV\', \'34857d973953e44afb49ea9d61104d8c\');' . "\n";
 
 		$file = fopen(DIR_OPENCART . 'config.php', 'w');
 
@@ -372,6 +375,9 @@ class ControllerCliInstall extends Controller {
 		$output .= 'define(\'DB_DATABASE\', \'' . addslashes($option['db_database']) . '\');' . "\n";
 		$output .= 'define(\'DB_PREFIX\', \'' . addslashes($option['db_prefix']) . '\');' . "\n";
 		$output .= 'define(\'DB_PORT\', \'' . addslashes($option['db_port']) . '\');' . "\n";
+        $output .= 'define(\'ENCRYPT_PAN\', \'true\');' . "\n";
+        $output .= 'define(\'ENCRYPT_PAN_KEY\', \'5ae1b8a17bad4da4fdac796f64c16ecd\');' . "\n";
+        $output .= 'define(\'ENCRYPT_PAN_IV\', \'34857d973953e44afb49ea9d61104d8c\');' . "\n";
 
 		$output .= '// OpenCart API' . "\n";
 		$output .= 'define(\'OPENCART_SERVER\', \'https://www.opencart.com/\');' . "\n";

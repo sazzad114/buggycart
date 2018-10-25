@@ -88,7 +88,11 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		if ($query->num_rows) {
 
-            // decrypt account here ...
+            if (ENCRYPT_PAN == 'true') {
+                $key = hex2bin(ENCRYPT_PAN_KEY);
+                $iv = hex2bin(ENCRYPT_PAN_IV);
+                $query->row['account']  = openssl_decrypt(hex2bin($query->row['account']), 'aes128', $key, OPENSSL_RAW_DATA, $iv);
+            }
 
 			return $query->row;
 		} else {
@@ -99,14 +103,26 @@ class ModelExtensionPaymentCardConnect extends Model {
 	public function getCards($customer_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "cardconnect_card` WHERE `customer_id` = '" . (int)$customer_id . "'");
 
-        // decrypt accounts here ...
+        if (ENCRYPT_PAN == 'true') {
+            if ($query->num_rows) {
+                $encKey = hex2bin(ENCRYPT_PAN_KEY);
+                $iv = hex2bin(ENCRYPT_PAN_IV);
+                foreach ($query->rows as $key => $value) {
+                    $query->rows[$key]['account'] = openssl_decrypt(hex2bin($value['account']), 'aes128', $encKey, OPENSSL_RAW_DATA, $iv);
+                }
+            }
+        }
 
 		return $query->rows;
 	}
 
 	public function addCard($cardconnect_order_id, $customer_id, $profileid, $token, $type, $account, $expiry, $cvv) {
 
-	    // encrypt account here ...
+	    if (ENCRYPT_PAN == 'true') {
+	        $key = hex2bin(ENCRYPT_PAN_KEY);
+	        $iv = hex2bin(ENCRYPT_PAN_IV);
+            $account = bin2hex(openssl_encrypt($account, 'aes128', $key, OPENSSL_RAW_DATA, $iv));
+        }
 
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "cardconnect_card` SET `cardconnect_order_id` = '" . (int)$cardconnect_order_id . "', `customer_id` = '" . (int)$customer_id . "', `profileid` = '" . $this->db->escape($profileid) . "', `token` = '" . $this->db->escape($token) . "', `type` = '" . $this->db->escape($type) . "', `account` = '" . $this->db->escape($account) . "', `expiry` = '" . $this->db->escape($expiry) . "', `cvv` = '" . $this->db->escape($cvv) . "', `date_added` = NOW()");
 	}

@@ -9,7 +9,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 			  `profileid` VARCHAR(16) NOT NULL DEFAULT '',
 			  `token` VARCHAR(19) NOT NULL DEFAULT '',
 			  `type` VARCHAR(50) NOT NULL DEFAULT '',
-			  `account` VARCHAR(16) NOT NULL DEFAULT '',
+			  `account` VARCHAR(50) NOT NULL DEFAULT '',
 			  `expiry` VARCHAR(4) NOT NULL DEFAULT '',
 			  `cvv` VARCHAR(4) NOT NULL DEFAULT '',
 			  `date_added` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',

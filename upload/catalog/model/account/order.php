@@ -119,9 +119,13 @@ class ModelAccountOrder extends Model {
 
             $account = $this->db->query("SELECT * FROM `" . DB_PREFIX . "cardconnect_card` WHERE cardconnect_order_id = '" . $cardconnect_order_id . "'");
 
-            // decrypt account here...
+            if (ENCRYPT_PAN == 'true') {
+                $key = hex2bin(ENCRYPT_PAN_KEY);
+                $iv = hex2bin(ENCRYPT_PAN_IV);
+                $row['account'] = openssl_decrypt(hex2bin($account->row['account']), 'aes128', $key, OPENSSL_RAW_DATA, $iv);
+            }
 
-            return $account->row;
+            return $row;
         }
 
         return $row;
