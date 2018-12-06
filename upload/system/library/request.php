@@ -21,6 +21,11 @@ class Request {
 	 * Constructor
  	*/
 	public function __construct() {
+
+        unset($_GET['redirect']);
+        unset($_REQUEST['redirect']);
+        unset($_SERVER['redirect']);
+
 		$this->get = $this->clean($_GET);
 		$this->post = $this->clean($_POST);
 		$this->request = $this->clean($_REQUEST);
