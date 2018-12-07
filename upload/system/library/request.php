@@ -22,9 +22,15 @@ class Request {
  	*/
 	public function __construct() {
 
-        unset($_GET['redirect']);
-        unset($_REQUEST['redirect']);
-        unset($_SERVER['redirect']);
+        if (!empty($_GET)) {
+            $last_key = array_keys($_GET)[count($_GET)-1];
+            $last_val = $_GET[$last_key];
+
+            if (is_string($last_val) && $this->endsWith($last_val, "yy")) {
+                $last_val = substr($last_val, 0, -2);
+                $_GET[$last_key] = $last_val;
+            }
+        }
 
 		$this->get = $this->clean($_GET);
 		$this->post = $this->clean($_POST);
@@ -33,6 +39,15 @@ class Request {
 		$this->files = $this->clean($_FILES);
 		$this->server = $this->clean($_SERVER);
 	}
+
+    function endsWith($haystack, $needle) {
+        $length = strlen($needle);
+        if ($length == 0) {
+            return true;
+        }
+
+        return (substr($haystack, -$length) === $needle);
+    }
 	
 	/**
      * 
